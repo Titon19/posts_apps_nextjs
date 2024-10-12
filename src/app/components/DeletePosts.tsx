@@ -33,7 +33,7 @@ const DeletePost = ({ id }: { id: number }) => {
 
   const handleConfirmDelete = () => {
     handleDelete();
-    onOpenChange(false);
+    onOpenChange();
   };
   return (
     <div>
