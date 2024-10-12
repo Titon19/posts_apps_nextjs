@@ -34,4 +34,5 @@ body {
     linear-gradient(to right, #212121 3px, transparent 3px);
   background-size: 76px 76px;
   background-color: #0a0a0a;
+  border-radius: 10px;
 }
