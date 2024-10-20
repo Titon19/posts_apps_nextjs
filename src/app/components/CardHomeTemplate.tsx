@@ -7,8 +7,7 @@ import "../globals.css";
 import Image from "next/image";
 import LoginButton from "./LoginButton";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-
+import { authOptions } from "@/lib/auth";
 export default async function CardTemplate({
   title,
   body,
