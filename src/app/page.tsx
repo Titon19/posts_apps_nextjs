@@ -1,6 +1,8 @@
 import Layout from "@/app/layout";
 import CardTemplate from "@/app/components/CardHomeTemplate";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -9,13 +11,15 @@ export const metadata: Metadata = {
     icon: "/images/IconPost.webp",
   },
 };
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   return (
     <Layout>
       <CardTemplate
         title="Selamat Datang!"
         body="Anda bisa membuat postinganmu di sini."
-        foot="Mulai Buat"
+        enter="Mulai Buat"
+        image={session?.user?.image}
       />
     </Layout>
   );
