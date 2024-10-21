@@ -11,7 +11,7 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 
-const DeletePost = ({ id }: { id: number }) => {
+const DeletePost = ({ id, onDelete }: { id: number; onDelete: () => void }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
   const handleDelete = async () => {
@@ -21,10 +21,8 @@ const DeletePost = ({ id }: { id: number }) => {
       });
 
       if (deleteRes.ok) {
+        onDelete();
         router.refresh();
-        setTimeout(() => {
-          router.replace("/posts");
-        }, 100);
       } else {
         alert("Data gagal dihapus");
       }
