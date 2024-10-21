@@ -34,6 +34,7 @@ const DeletePost = ({ id }: { id: number }) => {
   const handleConfirmDelete = () => {
     handleDelete();
     onOpenChange();
+    router.refresh();
   };
   return (
     <div>
