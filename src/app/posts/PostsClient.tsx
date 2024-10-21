@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Delete from "../components/DeletePosts";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
@@ -20,7 +20,7 @@ const PostsClient = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchPosts = useCallback(async () => {
     const fetchPosts = async () => {
       try {
         const res = await fetch("/api/posts");
@@ -40,6 +40,14 @@ const PostsClient = () => {
 
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  const handlePostDeleted = () => {
+    fetchPosts();
+  };
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -108,7 +116,7 @@ const PostsClient = () => {
                   >
                     Edit
                   </Button>
-                  <Delete id={parseInt(post.id)} />
+                  <Delete id={parseInt(post.id)} onDelete={handlePostDeleted} />
                 </CardFooter>
               </Card>
             ))
