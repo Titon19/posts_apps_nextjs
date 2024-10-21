@@ -21,8 +21,10 @@ const DeletePost = ({ id }: { id: number }) => {
       });
 
       if (deleteRes.ok) {
-        router.replace("/posts");
         router.refresh();
+        setTimeout(() => {
+          router.replace("/posts");
+        }, 100);
       } else {
         alert("Data gagal dihapus");
       }
@@ -31,10 +33,9 @@ const DeletePost = ({ id }: { id: number }) => {
     }
   };
 
-  const handleConfirmDelete = () => {
-    handleDelete();
+  const handleConfirmDelete = async () => {
+    await handleDelete();
     onOpenChange();
-    router.refresh();
   };
   return (
     <div>
